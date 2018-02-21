@@ -1,0 +1,54 @@
+// The dasherized version of the ruby classname is added to each element.
+// So: FerroElementAnchor becomes: ferro-element-anchor
+// Additionally the ruby superclassname is added to each element.
+// So if you have a class MyAnchor that inherits from FerroElementAnchor
+// both: my-anchor and ferro-element-anchor classes are added.
+// This makes it easy to add styles to elements based on it's ruby class.
+
+// General
+body {
+  font-family: "Open Sans",sans-serif;
+  background:   #eee;
+  color:        black;
+  font-size:      14pt;
+}
+
+// Main
+.main {
+  overflow:       auto;
+}
+
+// ToDo list
+.completed {
+  text-decoration: line-through;
+}
+
+.todo-status p, .todo-status a {
+  display:        inline-block;
+  margin-right:   3px;
+}
+
+.todo-entry {
+  margin:         10px 0;
+}
+
+.todo-entry .ferro-form-search-input {
+  margin-right:   5px;
+  height:         14px;
+  width:          70%;
+  max-width:      250px;
+}
+
+.todo-entry .ferro-form-search-submit {
+  border:         1px solid black;
+  background:     black;
+  color:          white;
+  font-weight:    bold;
+  height:         24px;
+  border-radius:  5px;
+}
+
+// Menu
+.menu {
+  padding: 10%;
+}
