@@ -1,9 +1,9 @@
 # The todo component
 # This defines all the needed parts (except todo items) and defines some helper methods.
-class Todo < FerroElementComponent
+class Todo < Ferro::Component::Base
 
   def cascade
-    add_child :title,  FerroElementText, size: 4, content: 'Todo list'
+    add_child :title,  Ferro::Element::Text, size: 4, content: 'Todo list'
     add_child :entry,  TodoEntry, button_text: 'Add', placeholder: 'New item ...'
     add_child :status, TodoStatus
     add_child :list,   TodoList
@@ -27,21 +27,20 @@ end
 
 # Text input and button, this is easy since we can use a ready made Ferro
 # component. We only need to implement its 'submitted' method.
-#
-# Todo inherits from FerroElementComponent. This means that all children
-# of Todo can reach the Todo instance using the 'component' keyword.
-class TodoEntry < FerroFormSearch
+class TodoEntry < Ferro::Combo::Search
 
   def submitted(value)
+    # Todo inherits from Ferro::Component::Base. This means that all children
+    # of Todo can reach the Todo instance using the 'component' method.
     component.add_list_item value
   end
 end
 
 # The status bar, just a text to show a count of items and a 'clear' link.
-class TodoStatus < FerroElementBlock
+class TodoStatus < Ferro::Element::Block
 
   def cascade
-    add_child :info,  FerroElementText
+    add_child :info,  Ferro::Element::Text
     add_child :clear, TodoStatusClear, content: '[clear]', href: ''
   end
 
@@ -50,7 +49,7 @@ class TodoStatus < FerroElementBlock
   end
 end
 
-class TodoStatusClear < FerroElementAnchor
+class TodoStatusClear < Ferro::Element::Anchor
 
   def clicked
     component.clear_list
@@ -58,7 +57,7 @@ class TodoStatusClear < FerroElementAnchor
 end
 
 # The list to hold and manage the todo items.
-class TodoList < FerroForm
+class TodoList < Ferro::Form::Base
 
   def cascade
     # We are keeping track of the todo-items ourselves
@@ -67,7 +66,7 @@ class TodoList < FerroForm
     # Every todo-item needs to have a unique name since
     # Ferro lements keeps track of their children via
     # that name. Call '@id.next' to generate a unique name.
-    @id = FerroSequence.new 'item_'
+    @id = Ferro::Sequence.new 'item_'
 
     # Add 3 example items
     [
@@ -105,7 +104,7 @@ class TodoList < FerroForm
 end
 
 # Todo item: a checkbox with a label.
-class TodoItem < FerroElementBlock
+class TodoItem < Ferro::Element::Block
 
   def before_create
     @content = option_replace :content
@@ -126,14 +125,14 @@ class TodoItem < FerroElementBlock
   end
 end
 
-class TodoCheckBox < FerroFormCheckBox
+class TodoCheckBox < Ferro::Form::CheckBox
 
   def clicked
     parent.toggle_content checked?
   end
 end
 
-class TodoLabel < FerroFormLabel
+class TodoLabel < Ferro::Form::Label
 
   def after_create
     # A state is a boolean flag that you can add to any Ferro class.

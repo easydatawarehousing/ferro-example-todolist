@@ -1,6 +1,6 @@
 # We need a class that inherits from FerroDocument.
 # This is the staring point for any Ferro application.
-class Document < FerroDocument
+class Document < Ferro::Document
 
   # The cascade method is called after the Document
   # has been created and is ready to create child
@@ -19,7 +19,7 @@ class Document < FerroDocument
   end
 end
 
-class Main < FerroElementArticle
+class Main < Ferro::Component::Article
 
   # Every Ferro class will add two css classes to the
   # related DOM object. So the main object will
@@ -32,10 +32,10 @@ end
 # # An example for setting up a menu
 # # You still need to setup the Ferro router to make
 # # menu clicks do something meaningful.
-# class Menu < FerroElementNavigation
+# class Menu < Ferro::Component::Navigation
 
 #   def cascade
-#     add_child :items, FerroElementList
+#     add_child :items, Ferro::Element::List
 
 #     3.times.each do |i|
 #       add_item "Option #{i+1}", "option_#{i+1}"
@@ -47,7 +47,7 @@ end
 #   end
 # end
 
-# class MenuItem < FerroElementListItem
+# class MenuItem < Ferro::Element::ListItem
 
 #   def before_create
 #     @content = option_replace :content
@@ -55,6 +55,6 @@ end
 #   end
 
 #   def cascade
-#     add_child :link, FerroElementAnchor, content: @content, href: @href
+#     add_child :link, Ferro::Element::Anchor, content: @content, href: @href
 #   end
 # end
