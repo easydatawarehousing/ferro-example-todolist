@@ -112,7 +112,7 @@ class TodoItem < Ferro::Element::Block
 
   def cascade
     add_child :cb,      TodoCheckBox
-    add_child :content, TodoLabel, content: @content, for: cb.object_id
+    add_child :content, TodoLabel, content: @content, for: cb.dom_id
   end
 
   def toggle_content(completed)

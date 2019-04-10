@@ -46,4 +46,7 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Sqlite
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
 end
